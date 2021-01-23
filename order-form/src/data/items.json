@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "id": 0,
+            "date": "2021-01-01",
+            "client": "John Doe",
+            "location": "Tel Aviv"
+        },
+        {
+            "id": 1,
+            "date": "2021-01-05",
+            "client": "John Doe",
+            "location": "Haifa"
+        },
+        {
+            "id": 2,
+            "date": "2021-06-01",
+            "client": "John Doe",
+            "location": "Jerusalem"
+        }
+    ]
+}
