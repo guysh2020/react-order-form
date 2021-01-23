@@ -1,91 +1,61 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Item from './item';
-// import ideasData from '../data/ideas.json';
-
-import {Fab} from '@material-ui/core'
-import AddIcon from '@material-ui/icons/Add'
+// import Table from './table';
 
 
-class ItemsList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: [
-                { id: 3, idea: "first idea", group: "tamar, haim" },
-                { id: 7, idea: "second idea", group: "guy, yaron" },
-                { id: 8, idea: "third idea", group: "gil, shimon" }
-            ],
-        }
-
-        this.eachItem = this.eachItem.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
-        this.nextId = this.nextId.bind(this);
-    }
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableContainer from '@material-ui/core/TableContainer';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 
-    delete(id) {
-        console.log(`delete: ${id}`);
 
-        this.setState(prevState => ({
-            items: prevState.ideas.filter(idea => idea.id !== id)
-        }))
-    }
-
-
-    componentDidMount() {
-        this.state.items.map(item => this.add({id:item.id,txt:item.idea, grp:item.group}));
-    }
-
-    update(newIdea, i) {
-        this.setState(prevState => ({
-            items: prevState.items.map(
-                idea => idea.id !== i ? idea : { ...idea, idea: newIdea }
-            )
-        }));
-    }
-
-    add({ id = null, txt = 'default title', grp = 'default group' }) {
-        this.setState(prevState => ({
-            items: [
-                ...prevState.items, {
-                    id: id !== null ? id : this.nextId(prevState.items),
-                    idea: txt,
-                    group: grp
-                }]
-        }))
-    }
-
-    nextId(items = []) {
-        let max = items.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id, 0);
-        return ++max;
-    }
+const useStyles = makeStyles({
+    root: {
+        width: '550px',
+        height: '594px',
+        borderRadius: '10px',
+        boxShadow: 'none'
+    },
+    container: {
+        maxHeight: 594,
+    },
+});
 
 
-    eachItem(item, i) {
-        return(
-                <div key={i} className="card" style={{width: 18 +"rem", marginBottom:7+'px'}}>
-                    <div className="card-body">
-                    <Item key={i} index={item.id} onChange={this.update} onDelete={this.delete}>
-                            <h4>{item.idea}</h4>
-                            <h5>by: {item.group}</h5>
-                        </Item>
-                    </div>
-                </div>
-        )
-
-    }
-
-
-    render() {
+export default function ItemsList(props) {
+    const eachItem = (item, i) => {
         return (
-            <div className="items-list">
-                {this.state.items.map(this.eachItem)}
-            </div>
-            
+            <Item
+                key={ item.id }
+                id={ item.id }
+                index={ i }
+                edit={ props.edit }
+                delete={ props.delete }
+                date={ item.date }
+                client={ item.client }
+                location={ item.location } />
         )
     }
+    const classes = useStyles();
+    return (
+        // <Table />
+        <Paper className={ classes.root }>
+            <TableContainer className={ classes.container }>
+                <Table aria-label="sticky table">
+                    <TableBody>
+                        { props.items.map(eachItem) }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper >
+
+        // <div className="items-list">
+        //     { props.items.map(eachItem) }
+        // </div>
+
+    )
+
 
 }
-
-export default ItemsList;

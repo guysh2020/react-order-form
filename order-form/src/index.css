@@ -1,13 +1,49 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family:'Rubik';
+  font-size:18px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* #root{
+  position: relative;
+  top: 0px;
+  right: 0px;
+} */
+
+.background{
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+  background-image: url('./Mask.svg');
+  width:1281px;
+  height:797px;
 }
+
+
+.App{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:flex-end;
+  position: relative;
+  top: 50px;
+
+}
+
+/* form{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+input{
+  width: 400px;
+  height: 60px;
+  border: 2px solid #EE4D47;
+  box-sizing: border-box;
+  box-shadow: 0px 20px 40px rgba(238, 77, 71, 0.2);
+  border-radius: 5px;
+  font-weight: bold;
+} */
+
+

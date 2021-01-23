@@ -1,73 +1,77 @@
-import React, { Component } from 'react';
-// import {MdDelete, MdEdit, MdSave} from 'react-icons/md'
 
-class Item extends Component {
-    constructor(props){
-        super(props);
+import React from 'react';
+import EditIcon from '@material-ui/icons/Edit';
+import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { makeStyles } from '@material-ui/core/styles';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
-        this.state = {
-            editing: false
-        }
-        this.newIdea = "";
-        this.edit = this.edit.bind(this);
-        this.delete = this.delete.bind(this);
-        this.save = this.save.bind(this);
-        this.renderForm = this.renderForm.bind(this);
-        this.renderUI = this.renderUI.bind(this);
-        this.inputChanged = this.inputChanged.bind(this);
+
+
+const useStyles = makeStyles({
+    button: {
+        marginLeft: '10px',
+        backgroundColor: '#ED4D47',
+        color: 'white',
+        boxShadow: 'none',
+
+    },
+    cell: {
+        borderBottom: 'none',
+        fontFamily: 'Rubik',
+        fontWeight: 300,
+
     }
-
-    edit(){
-        this.setState({
-             editing: true
-        })
-    }
-
-    save(e){
-        e.preventDefault();
-        this.props.onChange(this.newIdea.value, this.props.index)
-        
-        this.setState({
-            editing: false
-        });
-    }
-
-    delete(e){
-        this.props.onDelete(this.props.index);
-    }
+});
 
 
-    inputChanged({target: {value: text}}){
-        this.setState({
-            newIdea: text
-        })
-    }
+function Item(props) {
+    // return (
+    //     <div className="item">
+    //         <div className="item-details">
+    //             <label>{ props.index + 1 }.</label>
+    //             <label>{ props.date }</label>
+    //             <label>{ props.client }</label>
+    //             <label>{ props.location }</label>
+    //         </div>
+    //         <div>
+    // <Fab size='small' style={ { marginLeft: 18, backgroundColor: '#ED4D47', color: 'white' } } className='clickable' onClick={ () => { props.edit(props.id) } }>
+    //     <EditIcon />
+    // </Fab>
+    // <Fab size='small' style={ { marginLeft: 18, backgroundColor: '#ED4D47', color: 'white', } } className='clickable' onClick={ () => { props.delete(props.id) } }>
+    //     <DeleteIcon />
+    // </Fab>
+    //         </div>
+    //     </div>
+    // )
 
-    renderForm(){
-        return (
-            <div>
-                <form>
-                    <textarea onChange={this.inputChanged} value={this.state.newIdea}/>
-                    <button style={{marginLeft:7+'px'}} onClick={this.save}>save</button>
-                </form>
-            </div>
-        )
-    }
+    const classes = useStyles();
 
-    renderUI() {
-        return (
-            <div className="idea" style={{border: "1px solid black", padding: "5px", marginTop:"10px"}}>
-                <div>{this.props.children} </div>
-                <span>
-                    <button className="btn btn-primary" style={{marginRight:7+'px'}} onClick={this.edit}>edit</button>
-                    <button className="btn btn-primary"onClick={this.delete}>delete</button>
-                </span>
-            </div>
-        )
-    }
+    return (
+        <TableRow hover role="checkbox" tabIndex={ -1 } key={ props.id } style={ { border: "none" } }>
+            <TableCell key={ "index" } align={ "left" } className={ classes.cell }>
+                { props.index + 1 }
+            </TableCell>
+            <TableCell key={ "date" } align={ "left" } className={ classes.cell }>
+                { props.date }
+            </TableCell>
+            <TableCell key={ "client" } align={ "left" } className={ classes.cell }>
+                { props.client }
+            </TableCell>
+            <TableCell key={ "location" } align={ "left" } className={ classes.cell }>
+                { props.location }
+            </TableCell>
+            <TableCell key={ "actions" } align={ "right" } className={ classes.cell }>
+                <Fab size='small' className={ classes.button } onClick={ () => { props.edit(props.id) } }>
+                    <EditIcon />
+                </Fab>
+                <Fab size='small' className={ classes.button } onClick={ () => { props.delete(props.id) } }>
+                    <DeleteIcon />
+                </Fab>
+            </TableCell>
+        </TableRow>
+    );
 
-    render(){
-        return this.state.editing? this.renderForm() : this.renderUI();
-    }
 }
 export default Item;
