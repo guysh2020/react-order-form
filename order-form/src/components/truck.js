@@ -1,18 +1,16 @@
 
 import React from 'react';
-import Truck from '../truck.svg';
+import Truck from '../assets/truck.png';
 import { makeStyles } from '@material-ui/core/styles';
-
 
 const useStyles = makeStyles({
     truck: {
-        width: 811,
-        height: 394,
+        width: '50vw',
+        height: '35vmin',
         position: 'absolute',
-        bottom: -500,
-        left: 0
+        right: '50vw',
+        bottom: 0,
     },
-
 });
 
 
