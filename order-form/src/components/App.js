@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-
 import InputForm from './inputForm'
 import Truck from './truck'
 import Data from '../data/items.json'
-
 import ItemsList from './itemsList';
-// import InteractiveList from './components/list'
-// import { Paper } from '@material-ui/core';
-
-
 class App extends Component {
 	constructor() {
 		super()
@@ -73,28 +67,18 @@ class App extends Component {
 
 	render() {
 		return (
+			<>
+				<div className="background">
+					<div className="App">
+						< ItemsList items={ this.state.items } delete={ this.delete } edit={ this.editItem }></ItemsList>
+						<InputForm initialData={ this.state.itemToEdit } editing={ this.state.editing } submit={ this.onSubmit }></InputForm>
+					</div>
+				</div>
 
-			<div className="App">
-				<div className="background" />
-				< ItemsList items={ this.state.items } delete={ this.delete } edit={ this.editItem }></ItemsList>
-				<InputForm initialData={ this.state.itemToEdit } editing={ this.state.editing } submit={ this.onSubmit }></InputForm>
 				<Truck />
-
-			</div>
+			</>
 		)
 	}
-
-
 }
 
 export default App;
-
-
-{/* <div className="App">
-	<BackgroundImage />
-	< ItemsList items={ this.state.items } delete={ this.delete } edit={ this.editItem }></ItemsList>
-	{ this.state.editing ?
-		<InputForm key={ item.id } date={ item.date } client={ item.client } location={ item.location } submit={ this.onSubmit }></InputForm> :
-		<InputForm key={ this.state.idToEdit } submit={ this.onSubmit }></InputForm> }
-
-</div> */}
